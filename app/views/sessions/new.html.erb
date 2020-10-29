@@ -1,5 +1,12 @@
-<%= form_tag ({controller: 'sessions', action: 'create', method: 'post'}) do %>
-  <input name=name>
-  <input type=submit value='login'>
+<% if session[:name] %>
+  <h1>  <%= "hi, #{session[:name]}" %> </h1>
+<%= form_tag ({ controller: "sessions", action: "destroy", method: "post" }) do %>
+  <input type=submit value='logout'>
 <% end %>
 
+<% else %>
+    <%= form_tag "/login", method: "POST" do |f| %>
+        Name: <%= text_field_tag :name %>
+        <%= submit_tag "login" %>
+    <% end %>
+<% end %>
